@@ -1,9 +1,4 @@
-import {
-  BiArrowBack,
-  BiRightArrowAlt,
-  BiCategoryAlt,
-  BiWrench
-} from 'react-icons/bi'
+import { BiCategoryAlt, BiWrench } from 'react-icons/bi'
 import Slider from 'react-slick'
 import * as S from './style'
 import { useRouter } from 'next/router'
@@ -17,43 +12,56 @@ import Button from '@/components/Button'
 import Link from 'next/link'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+
+interface ArrowProps {
+  onClick: () => void
+}
 
 const Car = () => {
   const router = useRouter()
   const carro = router.query
-  const [sliderRef, setSliderRef] = useState<Slider | null>(null)
+  console.log(carro)
   const [open, setOpen] = useState(false)
 
+  const urlToString = (url: string | undefined) => {
+    return url?.toString() || ''
+  }
+
+  const PrevArrow = ({ onClick }: ArrowProps) => {
+    return (
+      <S.CustomPrevArrow onClick={onClick}>
+        <FaChevronLeft />
+      </S.CustomPrevArrow>
+    )
+  }
+
+  const NextArrow = ({ onClick }: ArrowProps) => {
+    return (
+      <S.CustomNextArrow onClick={onClick}>
+        <FaChevronRight />
+      </S.CustomNextArrow>
+    )
+  }
+  const imagensArray =
+    typeof carro?.imagens === 'string' ? [carro?.imagens] : carro?.imagens || []
+
   const settings = {
-    slidesToScroll: 1,
-    speed: 400,
-    ease: 'Pow4.easeIn',
     dots: true,
     infinite: true,
-    arrows: false,
-    className: 'center',
+    speed: 500,
     slidesToShow: 1,
-    swipeToSlide: true
-  }
-
-  const goToNext = () => {
-    if (sliderRef) {
-      sliderRef.slickNext()
+    slidesToScroll: 1,
+    prevArrow: <PrevArrow onClick={() => {}} />,
+    nextArrow: <NextArrow onClick={() => {}} />,
+    dotsClass: 'slick-dots slick-thumb',
+    customPaging: function (i: number) {
+      return (
+        <img key={i} src={urlToString(imagensArray[i])} alt={`Image ${i}`} />
+      )
     }
-  }
-
-  const goToPrev = () => {
-    if (sliderRef) {
-      sliderRef.slickPrev()
-    }
-  }
-  const handleClick = () => {
-    setOpen(!open)
-  }
-
-  const urlToString = (url: any) => {
-    url?.toString()
-    return url
   }
 
   const handleClose = (
@@ -63,7 +71,6 @@ const Car = () => {
     if (reason === 'clickaway') {
       return
     }
-
     setOpen(false)
   }
 
@@ -72,9 +79,9 @@ const Car = () => {
     const valorFormatado = valor.toFixed(3)
 
     const texto = `Gostei desse carro!
-    - Modelo: ${carro.modelo}
-    - Marca: ${carro.marca}
-    - Dono: ${carro.dono}
+    - Modelo: ${carro?.modelo}
+    - Marca: ${carro?.marca}
+    - Dono: ${carro?.dono}
     - Valor: ${valorFormatado}`
 
     navigator.clipboard
@@ -86,6 +93,7 @@ const Car = () => {
         console.error('Erro ao copiar texto:', error)
       })
   }
+
   return (
     <>
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
@@ -109,13 +117,27 @@ const Car = () => {
           </S.Back>
         </S.Logo>
         <S.Box>
-          {/* <Button color="white" onClick={goToPrev}>
-            <BiArrowBack fontSize={25} />
-          </Button> */}
-
           <S.Item>
             <S.Body>
-              <img className="box" src={urlToString(carro?.imagem)} />
+              <S.SlideBox>
+                {imagensArray.length === 0 ? (
+                  <div>
+                    <p>Nenhuma imagem disponível.</p>
+                  </div>
+                ) : (
+                  <Slider {...settings}>
+                    {imagensArray.map((image: string, index: number) => (
+                      <div key={index}>
+                        <img
+                          className="box"
+                          src={urlToString(image)}
+                          alt={`Image ${index}`}
+                        />
+                      </div>
+                    ))}
+                  </Slider>
+                )}
+              </S.SlideBox>
 
               <S.Tunning>
                 <S.Upgrade>
@@ -182,12 +204,6 @@ const Car = () => {
               <span className="fire">🔥</span>
             </Button>
           </S.Footer>
-          {/* ))} */}
-          {/* </Slider> */}
-
-          {/* <Button color="white" onClick={goToNext}>
-            <BiRightArrowAlt fontSize={25} />
-          </Button> */}
         </S.Box>
       </section>
     </>

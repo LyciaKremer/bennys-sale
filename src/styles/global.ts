@@ -115,4 +115,12 @@ textarea {
   height: 9rem;
   padding: 1rem;
 }
+.slick-thumb li {
+  width: 60px;
+  height: 45px;
+}
+.slick-thumb {
+  bottom: -45px;
+  
+}
 `

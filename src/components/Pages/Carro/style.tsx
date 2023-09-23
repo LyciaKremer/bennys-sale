@@ -75,7 +75,7 @@ export const Footer = styled.div`
   justify-content: space-between;
   flex-direction: column;
   padding: 30px 10%;
-  background-color: ${props => props.theme.colors.gray[900]};
+  border: 1px solid ${props => props.theme.colors.gray[900]};
   height: 100%;
   border-radius: 3px;
   @media ${breakpoints.lessThan(sizes.desktop)} {
@@ -122,7 +122,7 @@ export const ButtonCategorie = styled.div`
   font-size: ${props => props.theme.typography.md};
   letter-spacing: 0.1rem;
   background-color: ${props => props.theme.colors.secondary[500]};
-  :hover {
+  &:hover {
     background-color: ${props => props.theme.colors.secondary[900]};
   }
 `
@@ -184,8 +184,8 @@ export const Upgrade = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  color: ${props => props.theme.colors.gray[900]};
-  background: ${props => props.theme.colors.gray[100]};
+  color: ${props => props.theme.colors.gray[100]};
+  background: #333333;
   font-size: ${props => props.theme.typography.lg};
   gap: 10px;
   text-transform: uppercase;
@@ -220,7 +220,7 @@ export const CardCar = styled.div`
 `
 export const Back = styled.div`
   padding: 10px 18px;
-  background-color: ${props => props.theme.colors.secondary[500]};
+  background-color: ${props => props.theme.colors.gray[900]};
   border-radius: 3px;
   font-size: ${props => props.theme.typography.md};
   font-weight: 500;
@@ -230,4 +230,47 @@ export const Back = styled.div`
   a {
     color: ${props => props.theme.colors.gray[0]};
   }
+  &:hover {
+    background-color: ${props => props.theme.colors.gray[300]};
+    a {
+      color: ${props => props.theme.colors.gray[900]};
+    }
+  }
+`
+export const SlideBox = styled.div`
+  max-width: 500px;
+  @media ${breakpoints.lessThan(sizes.tablet)} {
+    max-width: 100%;
+    margin-bottom: 40px;
+  }
+`
+
+export const NoResults = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: ${props => props.theme.colors.gray[0]};
+  font-size: ${props => props.theme.typography.xl_2};
+  margin-top: 50px;
+  width: 100%;
+`
+export const CustomPrevArrow = styled.div`
+  position: absolute;
+  top: 50%;
+  left: -25px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 24px;
+  color: #ffffff;
+`
+
+export const CustomNextArrow = styled.div`
+  position: absolute;
+  top: 50%;
+  right: -25px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 24px;
+  color: #ffffff;
 `

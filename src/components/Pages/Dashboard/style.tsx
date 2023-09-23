@@ -84,25 +84,29 @@ export const Price = styled.div`
   font-weight: 600;
 `
 export const ButtonCategorie = styled.div`
-  color: white;
+  color: ${props => props.theme.colors.gray[0]};
   cursor: pointer;
-  padding: 5px 15px;
-  border-radius: 3px;
+  padding: 0 10px;
   font-size: ${props => props.theme.typography.md};
   letter-spacing: 0.1rem;
-  background-color: ${props => props.theme.colors.secondary[500]};
-  :hover {
-    background-color: ${props => props.theme.colors.secondary[900]};
+  text-transform: uppercase;
+  font-weight: 500;
+  &:hover {
+    color: ${props => props.theme.colors.primary[500]};
+  }
+  &::selection {
+    color: ${props => props.theme.colors.primary[500]};
   }
 `
 export const Categories = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: 0 20px 20px 20px;
+  border-bottom: 1px solid ${props => props.theme.colors.gray[900]};
   @media ${breakpoints.lessThan(sizes.desktop)} {
     flex-wrap: wrap;
     justify-content: flex-start;
-
     gap: 10px;
   }
 `
@@ -119,20 +123,28 @@ export const ListCars = styled.div`
     margin-bottom: 50px;
   }
 `
-export const CardCar = styled.a`
+export const CardCar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 15px 18px;
   border-radius: 3px;
-  gap: 8px;
-  background-color: ${props => props.theme.colors.gray[0]};
+  height: 280px;
+  border: 1px solid ${props => props.theme.colors.gray[900]};
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+    background-color: #1f1f1f;
+    border-color: ${props => props.theme.colors.gray[200]};
+  }
 
   .image {
     border-radius: 3px;
-    height: 150px;
+    min-height: 150px;
     width: 100%;
-    margin-bottom: 30px;
+    @media ${breakpoints.lessThan(sizes.tablet)} {
+      min-height: 100px;
+    }
   }
   .title {
     font-size: ${props => props.theme.typography.md};
@@ -141,7 +153,7 @@ export const CardCar = styled.a`
   }
   .price {
     font-size: ${props => props.theme.typography.lg};
-    color: ${props => props.theme.colors.gray[900]};
+    color: ${props => props.theme.colors.gray[100]};
     font-weight: 600;
   }
 `
@@ -153,7 +165,4 @@ export const NoResults = styled.div`
   color: ${props => props.theme.colors.gray[0]};
   font-size: ${props => props.theme.typography.xl_2};
   margin-top: 50px;
-  img {
-    max-width: 300px;
-  }
 `

@@ -18,7 +18,7 @@ interface Carro {
   marca: string
   dono: string
   valor: number
-  imagem: string
+  imagens: string[]
   categoria: string
   mecanico: string
   passaporte: string
@@ -35,6 +35,52 @@ interface Carro {
 const Dashboard = () => {
   const [data, setData] = useState<any[]>([])
   const [category, setCategory] = useState<string | null>(null)
+  const dadosPorColuna: DadosColuna = {}
+
+  data.forEach(row => {
+    for (const coluna in row) {
+      if (row.hasOwnProperty(coluna)) {
+        if (!dadosPorColuna[coluna]) {
+          dadosPorColuna[coluna] = []
+        }
+        dadosPorColuna[coluna].push(row[coluna])
+      }
+    }
+  })
+
+  const carros: Carro[] = []
+
+  const numLinhas = data.length
+
+  for (let i = 0; i < numLinhas; i++) {
+    const images = dadosPorColuna['imagens'][i]
+      ?.split(',')
+      .map((url: string) => url.trim())
+    const carro: Carro = {
+      modelo: dadosPorColuna['modelo'][i],
+      marca: dadosPorColuna['marca'][i],
+      dono: dadosPorColuna['dono'][i],
+      valor: parseFloat(dadosPorColuna['valor'][i]),
+      imagens: images || [],
+      categoria: dadosPorColuna['categoria'][i],
+      mecanico: dadosPorColuna['mecanico'][i],
+      passaporte: dadosPorColuna['passaporte'][i],
+      telefone: dadosPorColuna['telefone'][i],
+      placa: dadosPorColuna['placa'][i],
+      motor: dadosPorColuna['motor'][i],
+      freio: dadosPorColuna['freio'][i],
+      transmissao: dadosPorColuna['transmissao'][i],
+      suspensao: dadosPorColuna['suspensao'][i],
+      turbo: dadosPorColuna['turbo'][i],
+      blindagem: dadosPorColuna['blindagem'][i]
+    }
+
+    carros.push(carro)
+  }
+
+  const carrosFiltrados = carros.filter(carro =>
+    category ? carro.categoria === category : true
+  )
 
   useEffect(() => {
     axios
@@ -61,51 +107,7 @@ const Dashboard = () => {
       .catch(error => {
         console.error('Erro ao acessar a planilha do Google:', error)
       })
-  }, [])
-
-  const dadosPorColuna: DadosColuna = {}
-
-  data.forEach(row => {
-    for (const coluna in row) {
-      if (row.hasOwnProperty(coluna)) {
-        if (!dadosPorColuna[coluna]) {
-          dadosPorColuna[coluna] = []
-        }
-        dadosPorColuna[coluna].push(row[coluna])
-      }
-    }
-  })
-
-  const carros: Carro[] = []
-
-  const numLinhas = data.length
-
-  for (let i = 0; i < numLinhas; i++) {
-    const carro: Carro = {
-      modelo: dadosPorColuna['modelo'][i],
-      marca: dadosPorColuna['marca'][i],
-      dono: dadosPorColuna['dono'][i],
-      valor: parseFloat(dadosPorColuna['valor'][i]),
-      imagem: dadosPorColuna['imagem'][i]?.toString(),
-      categoria: dadosPorColuna['categoria'][i],
-      mecanico: dadosPorColuna['mecanico'][i],
-      passaporte: dadosPorColuna['passaporte'][i],
-      telefone: dadosPorColuna['telefone'][i],
-      placa: dadosPorColuna['placa'][i],
-      motor: dadosPorColuna['motor'][i],
-      freio: dadosPorColuna['freio'][i],
-      transmissao: dadosPorColuna['transmissao'][i],
-      suspensao: dadosPorColuna['suspensao'][i],
-      turbo: dadosPorColuna['turbo'][i],
-      blindagem: dadosPorColuna['blindagem'][i]
-    }
-
-    carros.push(carro)
-  }
-
-  const carrosFiltrados = carros.filter(carro =>
-    category ? carro.categoria === category : true
-  )
+  }, [carrosFiltrados])
 
   const urlToString = (url: any) => {
     url?.toString()
@@ -129,7 +131,7 @@ const Dashboard = () => {
             <S.ButtonCategorie onClick={() => setCategory(null)}>
               Todas
             </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('esportivos')}>
+            <S.ButtonCategorie onClick={() => setCategory('sport')}>
               Esportivos
             </S.ButtonCategorie>
             <S.ButtonCategorie onClick={() => setCategory('super')}>
@@ -150,30 +152,52 @@ const Dashboard = () => {
             <S.ButtonCategorie onClick={() => setCategory('suv')}>
               SUV
             </S.ButtonCategorie>
+            <S.ButtonCategorie onClick={() => setCategory('sedan')}>
+              Sedan
+            </S.ButtonCategorie>
+            <S.ButtonCategorie onClick={() => setCategory('motorcycles')}>
+              Motos
+            </S.ButtonCategorie>
+            <S.ButtonCategorie onClick={() => setCategory('cycles')}>
+              Bicicletas
+            </S.ButtonCategorie>
           </S.Categories>
+
           {carrosFiltrados.length > 0 ? (
             <S.ListCars>
-              {carrosFiltrados.map((carro: any, index) => (
-                <S.CardCar key={index}>
+              {carrosFiltrados.map((carro: any, index) => {
+                if (!carro.modelo || !carro.valor) {
+                  return null
+                }
+
+                return (
                   <Link
                     href={{
                       pathname: `/carro/${carro.modelo}`,
                       query: { ...carro }
                     }}
+                    key={index}
                   >
-                    <img className="image" src={urlToString(carro?.imagem)} />
-                    <div className="title">{carro.modelo}</div>
-                    <div className="price">R${carro.valor}.000</div>
+                    <S.CardCar>
+                      <img
+                        className="image"
+                        src={urlToString(carro?.imagens[0])}
+                      />
+                      <div className="info">
+                        <div className="title">{carro.modelo}</div>
+                        <div className="price">R${carro.valor}.000</div>
+                      </div>
+                    </S.CardCar>
                   </Link>
-                </S.CardCar>
-              ))}
+                )
+              })}
             </S.ListCars>
-          ) : (
+          ) : category !== null ? (
             <S.NoResults>
               <HiOutlineEmojiSad />
               Desculpa, não temos resultados para exibir!
             </S.NoResults>
-          )}
+          ) : null}
         </S.Box>
       </section>
     </>
