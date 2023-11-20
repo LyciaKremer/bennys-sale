@@ -191,7 +191,7 @@ const Dashboard = () => {
               </S.ButtonCategorie>
               <S.ButtonCategorie
                 onClick={() => setCategory('LowRiders')}
-                className={category === 'Muscle' ? 'selected' : ''}
+                className={category === 'LowRiders' ? 'selected' : ''}
               >
                 Lowrider
               </S.ButtonCategorie>
