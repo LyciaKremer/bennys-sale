@@ -282,18 +282,20 @@ export const ButtonRight = styled.div`
 `
 export const SlideBox = styled.div`
   margin-top: 64px;
+  max-width: 720px;
   .box {
     border: 4px solid #ffffff;
     border-radius: 20px;
     width: 720px;
     height: 450px;
     @media ${breakpoints.lessThan(sizes.tablet)} {
-      width: 90vw;
-      height: 300px;
+      width: 300px;
+      height: 200px;
     }
   }
   @media ${breakpoints.lessThan(sizes.tablet)} {
-    max-width: 100%;
+    max-width: 300px;
+    max-height: 300px;
     margin-bottom: 40px;
   }
 `
