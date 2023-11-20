@@ -19,8 +19,13 @@ export default createGlobalStyle`
 
   body {
     font-family: ${({ theme }) => theme.fonts.default};
-    background-color: ${props => props.theme.colors.backgroundLight};
+    background-image: url("/grafite2.png");
+    background-repeat: repeat-y;
+    background-position: center;
+    background-size: cover;
+    background-color: #cccccc;
     width: 100vw;
+    height: 100vh;
   }
   section,header,article,footer {
     width: 100%;
@@ -28,13 +33,10 @@ export default createGlobalStyle`
 
   section{
     margin: 0 auto;
-    max-width: 1000px;
+    max-width: 1920px;
     opacity: 0;
     animation: fadeIn 0.4s forwards ease-in-out;
-
-    @media ${breakpoints.lessThan(sizes.desktop)} {
-      padding: 1rem 2rem;
-    }
+    padding: 1rem 2rem;
   }
   @keyframes fadeIn {
     to {
@@ -121,6 +123,5 @@ textarea {
 }
 .slick-thumb {
   bottom: -45px;
-  
 }
 `

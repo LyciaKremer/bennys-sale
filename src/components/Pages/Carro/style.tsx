@@ -3,10 +3,9 @@ import styled from 'styled-components'
 import { breakpoints, sizes } from '../../../styles/breakpoints'
 
 export const Box = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  gap: 50px;
   height: 100%;
-  gap: 30px;
   button {
     color: ${props => props.theme.colors.gray[100]};
     :hover {
@@ -16,6 +15,7 @@ export const Box = styled.div`
   @media ${breakpoints.lessThan(sizes.desktop)} {
     display: flex;
     flex-direction: column;
+    gap: 0;
   }
 `
 export const MainContainer = styled.div`
@@ -27,6 +27,9 @@ export const Item = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 50px;
+  @media ${breakpoints.lessThan(sizes.desktop)} {
+    gap: 0;
+  }
 `
 export const Brand = styled.div`
   text-transform: uppercase;
@@ -37,13 +40,13 @@ export const Brand = styled.div`
 export const Model = styled.div`
   text-transform: uppercase;
   line-height: 70px;
-  font-size: 70px;
-  letter-spacing: 0.6rem;
+  font-size: 40px;
+  letter-spacing: 1.4px;
   color: ${props => props.theme.colors.gray[100]};
-  font-weight: 500 !important;
+  font-weight: 700 !important;
 `
 export const Header = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 `
 export const Body = styled.div`
   display: flex;
@@ -62,44 +65,42 @@ export const Body = styled.div`
 export const Logo = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  color: ${props => props.theme.colors.gray[0]};
+  justify-content: center;
   width: 100%;
-  padding: 40px 0;
-  @media ${breakpoints.lessThan(sizes.desktop)} {
-    padding: 20px 0 40px 0;
-  }
+  padding: 49px 0 34px 0;
 `
-export const Footer = styled.div`
+export const InfoCar = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 30px 10%;
-  border: 1px solid ${props => props.theme.colors.gray[900]};
-  height: 100%;
-  border-radius: 3px;
+  padding: 48px 0 12px 50px;
+  border: 1px solid #f3221d;
+  width: 450px;
+  height: 450px;
+  height: fit-content;
+  border-radius: 20px;
+  background-color: #000000;
   @media ${breakpoints.lessThan(sizes.desktop)} {
     margin-bottom: 50px;
   }
+  @media ${breakpoints.lessThan(sizes.tablet)} {
+    width: 100%;
+  }
   button {
+    position: relative;
+    bottom: -33px;
+    right: -24px;
     text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    font-weight: 500 !important;
-    .fire {
-      animation: wiggle 0.66s ease-in-out infinite;
-    }
-    @keyframes wiggle {
-      0% {
-        transform: rotate(-5deg);
-      }
-
-      50% {
-        transform: rotate(5deg);
-      }
-
-      100% {
-        transform: rotate(-5deg);
-      }
+    letter-spacing: 1.4px;
+    font-weight: 700 !important;
+    background-color: #f3221d;
+    border-radius: 20px;
+    width: 300px;
+    padding: 18px 0;
+    font-size: 16px;
+    @media ${breakpoints.lessThan(sizes.tablet)} {
+      right: 0;
+      left: -24px;
     }
   }
 `
@@ -107,12 +108,11 @@ export const Price = styled.div`
   display: flex;
   align-items: center;
   text-transform: uppercase;
-  font-size: 32px;
+  font-size: 30px;
   color: ${props => props.theme.colors.gray[100]};
-  letter-spacing: 0.3rem;
-  font-weight: 600;
-  margin-top: 50px;
-  margin-bottom: 20px;
+  letter-spacing: 1.4px;
+  font-weight: 700;
+  margin-top: 20px;
 `
 export const ButtonCategorie = styled.div`
   color: white;
@@ -144,54 +144,59 @@ export const ListCars = styled.div`
   gap: 10px;
   justify-content: space-between;
 `
+export const InfoCarDetails = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: ${props => props.theme.colors.gray[0]};
+  font-size: 15px;
+  gap: 10px;
+  text-transform: capitalize;
+  font-weight: 700;
+`
 export const Info = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   color: ${props => props.theme.colors.gray[0]};
-  font-size: ${props => props.theme.typography.lg};
+  font-size: 15px;
   gap: 10px;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  font-weight: 700;
 `
 export const ExpandInfo = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  color: ${props => props.theme.colors.gray[0]};
-  background-color: #000000;
-  font-size: ${props => props.theme.typography.lg};
+  color: #f3221d;
+  font-size: ${props => props.theme.typography.base};
   gap: 10px;
-  text-transform: capitalize;
-  padding: 15px 20px;
-  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 700;
 `
 export const Tunning = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   align-items: center;
-  width: 100%;
+  width: 66%;
   color: ${props => props.theme.colors.gray[0]};
-  font-size: ${props => props.theme.typography.lg};
+  border-radius: 20px;
+  background-color: ${props => props.theme.colors.gray[0]};
+  margin-top: 56px;
+  margin-bottom: 56px;
   gap: 10px;
+  padding: 30px 49px 36px 49px;
   @media ${breakpoints.lessThan(sizes.desktop)} {
     grid-template-columns: repeat(2, 1fr);
+  }
+  @media ${breakpoints.lessThan(sizes.tablet)} {
+    width: 100%;
+    padding: 25px 25px 25px 25px;
   }
 `
 export const Upgrade = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  width: 100%;
-  color: ${props => props.theme.colors.gray[100]};
-  background: #333333;
-  font-size: ${props => props.theme.typography.lg};
-  gap: 10px;
+  color: #000000;
+  font-size: ${props => props.theme.typography.base};
   text-transform: uppercase;
-  padding: 10px 20px;
-  font-weight: 600;
-  border-radius: 3px;
 `
 export const CardCar = styled.div`
   display: flex;
@@ -218,33 +223,80 @@ export const CardCar = styled.div`
     font-weight: 600;
   }
 `
-export const Back = styled.div`
-  padding: 10px 18px;
-  background-color: ${props => props.theme.colors.gray[900]};
-  border-radius: 3px;
-  font-size: ${props => props.theme.typography.md};
-  font-weight: 500;
+export const BackMobile = styled.div`
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 115.9px;
+  height: 50px;
+  background-color: #f3221d;
+  border-radius: 16px;
+  font-size: ${props => props.theme.typography.base};
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1rem;
-
+  letter-spacing: 1.4px;
+  margin-bottom: 64px;
   a {
     color: ${props => props.theme.colors.gray[0]};
   }
   &:hover {
-    background-color: ${props => props.theme.colors.gray[300]};
+    background-color: ${props => props.theme.colors.gray[900]};
     a {
-      color: ${props => props.theme.colors.gray[900]};
+      color: ${props => props.theme.colors.gray[0]};
     }
   }
+  @media ${breakpoints.lessThan(sizes.desktop)} {
+    display: flex;
+  }
+`
+export const BackDesktop = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 115.9px;
+  height: 50px;
+  background-color: #f3221d;
+  border-radius: 16px;
+  font-size: ${props => props.theme.typography.base};
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin-bottom: 64px;
+  a {
+    color: ${props => props.theme.colors.gray[0]};
+  }
+  &:hover {
+    background-color: ${props => props.theme.colors.gray[900]};
+    a {
+      color: ${props => props.theme.colors.gray[0]};
+    }
+  }
+  @media ${breakpoints.lessThan(sizes.desktop)} {
+    display: none;
+  }
+`
+export const ButtonRight = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 `
 export const SlideBox = styled.div`
-  max-width: 500px;
+  margin-top: 64px;
+  .box {
+    border: 4px solid #ffffff;
+    border-radius: 20px;
+    width: 720px;
+    height: 450px;
+    @media ${breakpoints.lessThan(sizes.tablet)} {
+      width: 90vw;
+      height: 300px;
+    }
+  }
   @media ${breakpoints.lessThan(sizes.tablet)} {
     max-width: 100%;
     margin-bottom: 40px;
   }
 `
-
 export const NoResults = styled.div`
   display: flex;
   align-items: center;
@@ -258,19 +310,53 @@ export const NoResults = styled.div`
 export const CustomPrevArrow = styled.div`
   position: absolute;
   top: 50%;
-  left: -25px;
+  left: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 24px;
+  color: #ffffff;
+  z-index: 1;
+`
+export const CustomNextArrow = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 20px;
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 24px;
   color: #ffffff;
 `
-
-export const CustomNextArrow = styled.div`
-  position: absolute;
-  top: 50%;
-  right: -25px;
-  transform: translateY(-50%);
+export const CenterAll = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+export const Loading = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  @media ${breakpoints.lessThan(sizes.tablet)} {
+    .image {
+      max-width: 300px;
+      max-height: 200px;
+    }
+  }
+`
+export const ButtonCopy = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #38b6ff;
+  font-size: 18px;
+  font-weight: 800;
+  border-top: 2px solid #959290;
+  border-radius: 0 0 10px 10px;
+  background-color: white;
+  padding: 18px 0;
   cursor: pointer;
-  font-size: 24px;
-  color: #ffffff;
 `

@@ -31,11 +31,13 @@
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.0.7",
+    "styled-react-modal": "^3.0.1",
     "typescript": "5.1.6"
   },
   "devDependencies": {
     "@types/papaparse": "^5.3.8",
     "@types/react-slick": "^0.23.10",
+    "@types/styled-react-modal": "^1.2.5",
     "prettier": "^3.0.2"
   }
 }

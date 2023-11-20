@@ -92,7 +92,7 @@ const theme = {
     xl_2: '2.5rem'
   },
   fonts: {
-    default: 'Barlow Condensed, sans-serif'
+    default: 'Montserrat, sans-serif'
   },
   effects: {
     transition: 'all 0.5s ease',

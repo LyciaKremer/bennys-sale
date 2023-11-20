@@ -1,4 +1,3 @@
-// import { BiData, BiHeartCircle, BiCool } from 'react-icons/bi'
 import Image from 'next/image'
 import * as S from './style'
 import { useEffect, useState } from 'react'
@@ -8,6 +7,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Link from 'next/link'
 import { HiOutlineEmojiSad } from 'react-icons/hi'
+import { BiChevronUp } from 'react-icons/bi'
 
 interface DadosColuna {
   [coluna: string]: any[]
@@ -15,7 +15,6 @@ interface DadosColuna {
 
 interface Carro {
   modelo: string
-  marca: string
   dono: string
   valor: number
   imagens: string[]
@@ -30,11 +29,14 @@ interface Carro {
   suspensao: string
   turbo: string
   blindagem: string
+  vendido: boolean
 }
 
 const Dashboard = () => {
   const [data, setData] = useState<any[]>([])
   const [category, setCategory] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
   const dadosPorColuna: DadosColuna = {}
 
   data.forEach(row => {
@@ -56,9 +58,9 @@ const Dashboard = () => {
     const images = dadosPorColuna['imagens'][i]
       ?.split(',')
       .map((url: string) => url.trim())
+
     const carro: Carro = {
       modelo: dadosPorColuna['modelo'][i],
-      marca: dadosPorColuna['marca'][i],
       dono: dadosPorColuna['dono'][i],
       valor: parseFloat(dadosPorColuna['valor'][i]),
       imagens: images || [],
@@ -72,7 +74,8 @@ const Dashboard = () => {
       transmissao: dadosPorColuna['transmissao'][i],
       suspensao: dadosPorColuna['suspensao'][i],
       turbo: dadosPorColuna['turbo'][i],
-      blindagem: dadosPorColuna['blindagem'][i]
+      blindagem: dadosPorColuna['blindagem'][i],
+      vendido: dadosPorColuna['vendido'][i]
     }
 
     carros.push(carro)
@@ -81,6 +84,13 @@ const Dashboard = () => {
   const carrosFiltrados = carros.filter(carro =>
     category ? carro.categoria === category : true
   )
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     axios
@@ -107,99 +117,182 @@ const Dashboard = () => {
       .catch(error => {
         console.error('Erro ao acessar a planilha do Google:', error)
       })
-  }, [carrosFiltrados])
+  }, [])
 
   const urlToString = (url: any) => {
     url?.toString()
     return url
   }
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollToTop(window.scrollY > 100)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
   return (
     <>
-      <section>
-        <Image
-          src="/logo.png"
-          className="mt-4 mb-5"
-          alt="logo"
-          width={100}
-          height={32}
-          priority
-        />
+      {loading ? (
+        <S.Loading>
+          <Image
+            src="/carregamento_sem_fundo.gif"
+            alt="logo"
+            className="image"
+            width={1000}
+            height={465}
+            priority
+          />
+        </S.Loading>
+      ) : (
+        <section>
+          <S.Header>
+            <Image
+              src="/Logo_Feirao.png"
+              alt="logo"
+              width={325.5}
+              height={118.5}
+              priority
+            />
+          </S.Header>
 
-        <S.Box>
-          <S.Categories>
-            <S.ButtonCategorie onClick={() => setCategory(null)}>
-              Todas
-            </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('sport')}>
-              Esportivos
-            </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('super')}>
-              Super
-            </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('muscle')}>
-              Muscle
-            </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('lowrider')}>
-              Lowrider
-            </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('compacts')}>
-              Compactos
-            </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('offroad')}>
-              Offroad
-            </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('suv')}>
-              SUV
-            </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('sedan')}>
-              Sedan
-            </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('motorcycles')}>
-              Motos
-            </S.ButtonCategorie>
-            <S.ButtonCategorie onClick={() => setCategory('cycles')}>
-              Bicicletas
-            </S.ButtonCategorie>
-          </S.Categories>
+          <S.Box>
+            <S.Categories>
+              <S.ButtonCategorie
+                onClick={() => setCategory(null)}
+                className={category === null ? 'selected' : ''}
+              >
+                Todas
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('Sports')}
+                className={category === 'Sports' ? 'selected' : ''}
+              >
+                Esportivos
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('Super')}
+                className={category === 'Super' ? 'selected' : ''}
+              >
+                Super
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('Muscle')}
+                className={category === 'Muscle' ? 'selected' : ''}
+              >
+                Muscle
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('LowRiders')}
+                className={category === 'Muscle' ? 'selected' : ''}
+              >
+                Lowrider
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('Compactos')}
+                className={category === 'Compactos' ? 'selected' : ''}
+              >
+                Compactos
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('OffRoad')}
+                className={category === 'OffRoad' ? 'selected' : ''}
+              >
+                Offroad
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('SUVs')}
+                className={category === 'SUVs' ? 'selected' : ''}
+              >
+                SUVs
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('Sedans')}
+                className={category === 'Sedans' ? 'selected' : ''}
+              >
+                Sedan
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('Classicos')}
+                className={category === 'Classicos' ? 'selected' : ''}
+              >
+                Clássicos
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('Vans')}
+                className={category === 'Vans' ? 'selected' : ''}
+              >
+                Vans
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('Motos')}
+                className={category === 'Motos' ? 'selected' : ''}
+              >
+                Motos
+              </S.ButtonCategorie>
+              <S.ButtonCategorie
+                onClick={() => setCategory('Bikes')}
+                className={category === 'Bikes' ? 'selected' : ''}
+              >
+                Bicicletas
+              </S.ButtonCategorie>
+            </S.Categories>
 
-          {carrosFiltrados.length > 0 ? (
-            <S.ListCars>
-              {carrosFiltrados.map((carro: any, index) => {
-                if (!carro.modelo || !carro.valor) {
-                  return null
-                }
+            {carrosFiltrados.length > 0 ? (
+              <S.ListCars>
+                {carrosFiltrados.map((carro: any, index) => {
+                  if (!carro.modelo || !carro.valor) {
+                    return null
+                  }
 
-                return (
-                  <Link
-                    href={{
-                      pathname: `/carro/${carro.modelo}`,
-                      query: { ...carro }
-                    }}
-                    key={index}
-                  >
-                    <S.CardCar>
-                      <img
-                        className="image"
-                        src={urlToString(carro?.imagens[0])}
-                      />
-                      <div className="info">
-                        <div className="title">{carro.modelo}</div>
-                        <div className="price">R${carro.valor}.000</div>
-                      </div>
-                    </S.CardCar>
-                  </Link>
-                )
-              })}
-            </S.ListCars>
-          ) : category !== null ? (
-            <S.NoResults>
-              <HiOutlineEmojiSad />
-              Desculpa, não temos resultados para exibir!
-            </S.NoResults>
-          ) : null}
-        </S.Box>
-      </section>
+                  return (
+                    <Link
+                      href={{
+                        pathname: `/carro/${carro.modelo}`,
+                        query: { ...carro }
+                      }}
+                      key={index}
+                    >
+                      <S.CardCar>
+                        <img
+                          className="image"
+                          src={urlToString(carro?.imagens[0])}
+                        />
+
+                        <div className="info">
+                          <div className="title">{carro.modelo}</div>
+                          {carro?.vendido ? (
+                            <S.SoldStatus>Vendido!</S.SoldStatus>
+                          ) : (
+                            <div className="price">R${carro.valor}.000</div>
+                          )}
+                        </div>
+                      </S.CardCar>
+                    </Link>
+                  )
+                })}
+              </S.ListCars>
+            ) : category !== null ? (
+              <S.NoResults>
+                <HiOutlineEmojiSad />
+                Desculpa, não temos resultados para exibir!
+              </S.NoResults>
+            ) : null}
+          </S.Box>
+        </section>
+      )}
+      {showScrollToTop && (
+        <S.ScrollToTopButton onClick={handleScrollToTop}>
+          <BiChevronUp />
+        </S.ScrollToTopButton>
+      )}
     </>
   )
 }

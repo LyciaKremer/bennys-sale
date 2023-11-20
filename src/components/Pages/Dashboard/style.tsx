@@ -39,7 +39,13 @@ export const Model = styled.div`
   color: ${props => props.theme.colors.gray[100]};
   font-weight: 500 !important;
 `
-export const Header = styled.div``
+export const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 49px 0 34px 0;
+`
 export const Body = styled.div`
   img {
     max-width: 500px;
@@ -86,13 +92,16 @@ export const Price = styled.div`
 export const ButtonCategorie = styled.div`
   color: ${props => props.theme.colors.gray[0]};
   cursor: pointer;
-  padding: 0 10px;
-  font-size: ${props => props.theme.typography.md};
-  letter-spacing: 0.1rem;
+  font-size: ${props => props.theme.typography.base};
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 400;
   &:hover {
-    color: ${props => props.theme.colors.primary[500]};
+    color: #f3221d;
+    font-weight: 700;
+  }
+  &.selected {
+    color: #f3221d;
+    font-weight: 700;
   }
   &::selection {
     color: ${props => props.theme.colors.primary[500]};
@@ -100,38 +109,44 @@ export const ButtonCategorie = styled.div`
 `
 export const Categories = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  gap: 38px;
   width: 100%;
-  padding: 0 20px 20px 20px;
-  border-bottom: 1px solid ${props => props.theme.colors.gray[900]};
-  @media ${breakpoints.lessThan(sizes.desktop)} {
+  padding: 0 0 27px 0;
+  border-bottom: 1px solid #f3221d;
+  margin-bottom: 39px;
+  @media ${breakpoints.lessThan(sizes.large)} {
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 10px;
   }
 `
 export const ListCars = styled.div`
-  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  justify-content: space-between;
-  padding-top: 40px;
+  gap: 20px;
+
   @media ${breakpoints.lessThan(sizes.desktop)} {
     grid-template-columns: repeat(2, 1fr);
-    margin-bottom: 50px;
+  }
+  @media ${breakpoints.lessThan(sizes.large)} {
+    justify-content: center;
+    align-items: center;
   }
 `
 export const CardCar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 15px 18px;
-  border-radius: 3px;
-  height: 280px;
-  border: 1px solid ${props => props.theme.colors.gray[900]};
+  padding: 22px 20px 25px 20px;
+  background-color: #2d2c2c;
   transition: all 0.2s ease-in-out;
+  gap: 29px;
+  max-width: 280px;
+  margin-bottom: 7px;
   &:hover {
     transform: scale(1.1);
     background-color: #1f1f1f;
@@ -139,22 +154,23 @@ export const CardCar = styled.div`
   }
 
   .image {
-    border-radius: 3px;
     min-height: 150px;
-    width: 100%;
+    height: 200px;
+    width: 240px;
     @media ${breakpoints.lessThan(sizes.tablet)} {
       min-height: 100px;
     }
   }
   .title {
-    font-size: ${props => props.theme.typography.md};
-    color: ${props => props.theme.colors.gray[700]};
-    font-weight: 500;
+    font-size: ${props => props.theme.typography.base};
+    color: ${props => props.theme.colors.gray[0]};
+    font-weight: 700;
+    text-transform: uppercase;
   }
   .price {
-    font-size: ${props => props.theme.typography.lg};
+    font-size: ${props => props.theme.typography.base};
     color: ${props => props.theme.colors.gray[100]};
-    font-weight: 600;
+    font-weight: 400;
   }
 `
 export const NoResults = styled.div`
@@ -165,4 +181,45 @@ export const NoResults = styled.div`
   color: ${props => props.theme.colors.gray[0]};
   font-size: ${props => props.theme.typography.xl_2};
   margin-top: 50px;
+`
+export const Loading = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  @media ${breakpoints.lessThan(sizes.tablet)} {
+    .image {
+      max-width: 300px;
+      max-height: 200px;
+    }
+  }
+`
+export const SoldStatus = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #f3221d;
+  color: #000000;
+  font-size: ${props => props.theme.typography.base};
+  font-weight: 700;
+`
+export const ScrollToTopButton = styled.button`
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  bottom: 20px;
+  right: 20px;
+  background-color: #f3221d;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  z-index: 10;
+  font-size: ${props => props.theme.typography.xl_2};
 `
