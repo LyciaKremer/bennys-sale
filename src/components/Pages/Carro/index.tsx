@@ -81,11 +81,11 @@ const Car = () => {
     const valor = parseFloat(carro?.valor) || 0
     const valorFormatado = valor.toFixed(3)
 
-    const texto = `me 
-    Gostei desse carro!
-    - Modelo: ${carro?.modelo}
-    - Dono: ${carro?.dono}
-    - Valor: ${valorFormatado}`
+    const texto =
+      'me Gostei desse carro!' +
+      '\n- Modelo: ${carro?.modelo}' +
+      '\n- Dono: ${carro?.dono}' +
+      '\n- Valor: ${valorFormatado}'
     navigator.clipboard.writeText(texto)
   }
 
