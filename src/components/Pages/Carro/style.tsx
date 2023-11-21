@@ -69,9 +69,11 @@ export const Logo = styled.div`
   max-width: 950px;
   width: 100%;
   padding: 49px 0 34px 0;
-  img{
-    width: 200px;
-    height: 70px;
+  @media ${breakpoints.lessThan(sizes.desktop)} {
+    img {
+      width: 200px;
+      height: 70px;
+    }
   }
 `
 export const InfoCar = styled.div`
