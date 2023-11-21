@@ -22,7 +22,6 @@ interface Carro {
   mecanico: string
   passaporte: string
   telefone: string
-  placa: string
   motor: string
   freio: string
   transmissao: string
@@ -68,7 +67,6 @@ const Dashboard = () => {
       mecanico: dadosPorColuna['mecanico'][i],
       passaporte: dadosPorColuna['passaporte'][i],
       telefone: dadosPorColuna['telefone'][i],
-      placa: dadosPorColuna['placa'][i],
       motor: dadosPorColuna['motor'][i],
       freio: dadosPorColuna['freio'][i],
       transmissao: dadosPorColuna['transmissao'][i],

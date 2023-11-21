@@ -104,124 +104,115 @@ const Car = () => {
         </S.Loading>
       ) : (
         <section>
-          <S.Logo>
-            <Link href="/">
-              <Image
-                src="/Logo_Feirao.png"
-                alt="logo"
-                className="flicker"
-                width={325.5}
-                height={118.5}
-                priority
-              />
-            </Link>
-          </S.Logo>
-          <S.CenterAll>
-            <S.Box>
-              <S.Item>
-                <S.ButtonRight>
-                  <S.BackMobile>
-                    <Link href="/">voltar</Link>
-                  </S.BackMobile>
-                </S.ButtonRight>
-                <S.Body>
-                  <S.SlideBox>
-                    {imagensArray.length === 0 ? (
-                      <div>
-                        <p>Nenhuma imagem disponível.</p>
-                      </div>
-                    ) : (
-                      <Slider {...settings}>
-                        {imagensArray.map((image: string, index: number) => (
-                          <div key={index}>
-                            <img
-                              className="box"
-                              src={urlToString(image)}
-                              alt={`Image ${index}`}
-                            />
-                          </div>
-                        ))}
-                      </Slider>
-                    )}
-                  </S.SlideBox>
-                </S.Body>
-              </S.Item>
-              <div>
-                <S.ButtonRight>
-                  <S.BackDesktop>
-                    <Link href="/">voltar</Link>
-                  </S.BackDesktop>
-                </S.ButtonRight>
-                <S.InfoCar>
-                  <S.Header>
-                    <S.Model>{carro?.modelo}</S.Model>
-                  </S.Header>
-                  <S.ListInfo>
-                    <S.InfoCarDetails>
-                      <BsPerson />
-                      {carro?.dono}
-                    </S.InfoCarDetails>
-                    <S.InfoCarDetails>
-                      <BiCategoryAlt />
-                      {carro?.categoria}
-                    </S.InfoCarDetails>
-                    <S.InfoCarDetails>
-                      <BiWrench />
-                      {carro?.mecanico}
-                    </S.InfoCarDetails>
-                    <S.InfoCarDetails>
-                      <FaRegAddressCard />
-                      {carro?.passaporte}
-                    </S.InfoCarDetails>
-                    <S.InfoCarDetails>
-                      <FiPhone />
-                      {carro?.telefone}
-                    </S.InfoCarDetails>
-                    <S.InfoCarDetails>
-                      <RiCarLine />
-                      {carro?.placa}
-                    </S.InfoCarDetails>
-                  </S.ListInfo>
-                  <S.Price>R${carro?.valor}.000</S.Price>
-                  <Button
-                    className="button"
-                    color="primary"
-                    onClick={() => {
-                      toggleModal(), copyToClipboard(carro)
-                    }}
-                  >
-                    Quero esse carro!
-                  </Button>
-                </S.InfoCar>
-              </div>
-            </S.Box>
-            <S.Tunning>
-              <S.Upgrade>
-                motor
-                <S.ExpandInfo>{carro?.motor}</S.ExpandInfo>
-              </S.Upgrade>
-              <S.Upgrade>
-                freio
-                <S.ExpandInfo>{carro?.freio}</S.ExpandInfo>
-              </S.Upgrade>
-              <S.Upgrade>
-                transmissão
-                <S.ExpandInfo>{carro?.transmissao}</S.ExpandInfo>
-              </S.Upgrade>
-              <S.Upgrade>
-                suspensão
-                <S.ExpandInfo>{carro?.suspensao}</S.ExpandInfo>
-              </S.Upgrade>
-              <S.Upgrade>
-                turbo
-                <S.ExpandInfo>{carro?.turbo}</S.ExpandInfo>
-              </S.Upgrade>
-              <S.Upgrade>
-                blindagem
-                <S.ExpandInfo>{carro?.blindagem}</S.ExpandInfo>
-              </S.Upgrade>
-            </S.Tunning>
-          </S.CenterAll>
+          <S.BoxCenter>
+            <S.Logo>
+              <Link href="/">
+                <Image
+                  src="/Logo_Feirao.png"
+                  alt="logo"
+                  width={325.5}
+                  height={118.5}
+                  priority
+                />
+              </Link>
+
+              <S.Back>
+                <Link href="/">voltar</Link>
+              </S.Back>
+            </S.Logo>
+            <S.CenterAll>
+              <S.Box>
+                <S.Item>
+                  <S.Body>
+                    <S.SlideBox>
+                      {imagensArray.length === 0 ? (
+                        <div>
+                          <p>Nenhuma imagem disponível.</p>
+                        </div>
+                      ) : (
+                        <Slider {...settings}>
+                          {imagensArray.map((image: string, index: number) => (
+                            <div key={index}>
+                              <img
+                                className="box"
+                                src={urlToString(image)}
+                                alt={`Image ${index}`}
+                              />
+                            </div>
+                          ))}
+                        </Slider>
+                      )}
+                    </S.SlideBox>
+                  </S.Body>
+                </S.Item>
+                <div>
+                  <S.InfoCar>
+                    <S.Header>
+                      <S.Model>{carro?.modelo}</S.Model>
+                    </S.Header>
+                    <S.ListInfo>
+                      <S.InfoCarDetails>
+                        <BsPerson />
+                        {carro?.dono}
+                      </S.InfoCarDetails>
+                      <S.InfoCarDetails>
+                        <BiCategoryAlt />
+                        {carro?.categoria}
+                      </S.InfoCarDetails>
+                      <S.InfoCarDetails>
+                        <BiWrench />
+                        {carro?.mecanico}
+                      </S.InfoCarDetails>
+                      <S.InfoCarDetails>
+                        <FaRegAddressCard />
+                        {carro?.passaporte}
+                      </S.InfoCarDetails>
+                      <S.InfoCarDetails>
+                        <FiPhone />
+                        {carro?.telefone}
+                      </S.InfoCarDetails>
+                    </S.ListInfo>
+                    <S.Price>R${carro?.valor}.000</S.Price>
+                    <Button
+                      className="button"
+                      color="primary"
+                      onClick={() => {
+                        toggleModal(), copyToClipboard(carro)
+                      }}
+                    >
+                      Quero esse carro!
+                    </Button>
+                  </S.InfoCar>
+                </div>
+              </S.Box>
+              <S.Tunning>
+                <S.Upgrade>
+                  motor
+                  <S.ExpandInfo>{carro?.motor}</S.ExpandInfo>
+                </S.Upgrade>
+                <S.Upgrade>
+                  freio
+                  <S.ExpandInfo>{carro?.freio}</S.ExpandInfo>
+                </S.Upgrade>
+                <S.Upgrade>
+                  transmissão
+                  <S.ExpandInfo>{carro?.transmissao}</S.ExpandInfo>
+                </S.Upgrade>
+                <S.Upgrade>
+                  suspensão
+                  <S.ExpandInfo>{carro?.suspensao}</S.ExpandInfo>
+                </S.Upgrade>
+                <S.Upgrade>
+                  turbo
+                  <S.ExpandInfo>{carro?.turbo}</S.ExpandInfo>
+                </S.Upgrade>
+                <S.Upgrade>
+                  blindagem
+                  <S.ExpandInfo>{carro?.blindagem}</S.ExpandInfo>
+                </S.Upgrade>
+              </S.Tunning>
+            </S.CenterAll>
+          </S.BoxCenter>
         </section>
       )}
       <ToggleModalTiny

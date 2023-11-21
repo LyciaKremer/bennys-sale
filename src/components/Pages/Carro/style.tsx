@@ -46,7 +46,7 @@ export const Model = styled.div`
   font-weight: 700 !important;
 `
 export const Header = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 `
 export const Body = styled.div`
   display: flex;
@@ -65,19 +65,23 @@ export const Body = styled.div`
 export const Logo = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  max-width: 950px;
   width: 100%;
   padding: 49px 0 34px 0;
+  img{
+    width: 200px;
+    height: 70px;
+  }
 `
 export const InfoCar = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 48px 0 12px 50px;
-  border: 1px solid #f3221d;
-  width: 450px;
+  padding: 48px 0 68px 50px;
+  border: 4px solid #f3221d;
+  width: 365.9px;
   height: 450px;
-  height: fit-content;
   border-radius: 20px;
   background-color: #000000;
   @media ${breakpoints.lessThan(sizes.desktop)} {
@@ -88,16 +92,16 @@ export const InfoCar = styled.div`
   }
   button {
     position: relative;
-    bottom: -33px;
-    right: -24px;
+    bottom: -57px;
+    right: 25px;
     text-transform: uppercase;
     letter-spacing: 1.4px;
     font-weight: 700 !important;
     background-color: #f3221d;
-    border-radius: 20px;
-    width: 300px;
-    padding: 18px 0;
+    border-radius: 15px;
+    padding: 22px 20px;
     font-size: 16px;
+    line-height: 16px;
     @media ${breakpoints.lessThan(sizes.tablet)} {
       right: 0;
       left: -24px;
@@ -175,14 +179,15 @@ export const Tunning = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   align-items: center;
-  width: 66%;
+  max-width: 950px;
+  width: 100%;
   color: ${props => props.theme.colors.gray[0]};
   border-radius: 20px;
   background-color: ${props => props.theme.colors.gray[0]};
   margin-top: 56px;
   margin-bottom: 56px;
   gap: 10px;
-  padding: 30px 49px 36px 49px;
+  padding: 24px 38px 28px 38px;
   @media ${breakpoints.lessThan(sizes.desktop)} {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -249,7 +254,7 @@ export const BackMobile = styled.div`
     display: flex;
   }
 `
-export const BackDesktop = styled.div`
+export const Back = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -261,7 +266,7 @@ export const BackDesktop = styled.div`
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.4px;
-  margin-bottom: 64px;
+  padding: 18px 25px;
   a {
     color: ${props => props.theme.colors.gray[0]};
   }
@@ -271,23 +276,14 @@ export const BackDesktop = styled.div`
       color: ${props => props.theme.colors.gray[0]};
     }
   }
-  @media ${breakpoints.lessThan(sizes.desktop)} {
-    display: none;
-  }
-`
-export const ButtonRight = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
 `
 export const SlideBox = styled.div`
-  margin-top: 64px;
-  max-width: 720px;
+  max-width: 530px;
   .box {
-    border: 4px solid #ffffff;
+    border: 4px solid #f3221d;
     border-radius: 20px;
-    width: 720px;
-    height: 450px;
+    width: 530px;
+    height: 440px;
     @media ${breakpoints.lessThan(sizes.tablet)} {
       width: 300px;
       height: 200px;
@@ -361,4 +357,10 @@ export const ButtonCopy = styled.div`
   background-color: white;
   padding: 18px 0;
   cursor: pointer;
+`
+export const BoxCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `
