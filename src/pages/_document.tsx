@@ -50,7 +50,7 @@ export default class MyDocument extends Document {
           />
           <meta
             property="og:image"
-            content="https://media.discordapp.net/attachments/1174785131156885524/1175544924779860018/Logo_Feirao.png"
+            content="https://media.discordapp.net/attachments/1148836568593862706/1176361647972028497/BG_Full_1920x1080.png"
           />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
