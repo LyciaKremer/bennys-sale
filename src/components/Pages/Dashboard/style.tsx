@@ -128,12 +128,9 @@ export const ListCars = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-  max-height: 615px;
   height: 100%;
   gap: 20px;
   padding: 44px 64px;
-  background-color: #000000;
-  overflow: auto;
 
   @media ${breakpoints.lessThan(sizes.desktop)} {
     grid-template-columns: repeat(2, 1fr);
