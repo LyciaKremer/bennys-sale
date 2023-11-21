@@ -81,7 +81,7 @@ const Car = () => {
     const valor = parseFloat(carro?.valor) || 0
     const valorFormatado = valor.toFixed(3)
 
-    const texto = `/me 
+    const texto = `me 
     Gostei desse carro!
     - Modelo: ${carro?.modelo}
     - Dono: ${carro?.dono}
