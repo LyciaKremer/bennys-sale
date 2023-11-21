@@ -282,7 +282,7 @@ const Dashboard = () => {
             ) : category !== null ? (
               <S.NoResults>
                 <HiOutlineEmojiSad />
-                Desculpa, não temos resultados para exibir!
+                Desculpe, mas não temos um veículo nessa categoria ainda!
               </S.NoResults>
             ) : null}
           </S.Box>
