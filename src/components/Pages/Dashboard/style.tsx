@@ -7,7 +7,7 @@ export const Box = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+
   button {
     color: ${props => props.theme.colors.gray[100]};
     :hover {
@@ -44,7 +44,7 @@ export const Header = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 49px 0 34px 0;
+  padding: 30px 0 34px 0;
 `
 export const Body = styled.div`
   img {
@@ -115,7 +115,7 @@ export const Categories = styled.div`
   width: 100%;
   padding: 0 0 27px 0;
   border-bottom: 1px solid #f3221d;
-  margin-bottom: 39px;
+  margin-bottom: 19px;
   @media ${breakpoints.lessThan(sizes.large)} {
     flex-wrap: wrap;
     justify-content: center;
@@ -124,10 +124,16 @@ export const Categories = styled.div`
 `
 export const ListCars = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 50px;
   width: 100%;
+  max-height: 615px;
+  height: 100%;
   gap: 20px;
+  padding: 44px 64px;
+  background-color: #000000;
+  overflow: auto;
 
   @media ${breakpoints.lessThan(sizes.desktop)} {
     grid-template-columns: repeat(2, 1fr);

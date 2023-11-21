@@ -10,8 +10,24 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    
+    /* width */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #151515; 
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #f3221d; 
+    }
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555; 
+    }
   }
-
   ::selection{
     background-color: ${props => props.theme.colors.primary[500]};
     color: white;
@@ -23,8 +39,7 @@ export default createGlobalStyle`
     background-repeat: repeat-y;
     background-position: center;
     background-size: cover;
-    background-color: #cccccc;
-    width: 100vw;
+    background-color: #000000;
     height: 100vh;
   }
   section,header,article,footer {
@@ -112,16 +127,16 @@ export default createGlobalStyle`
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active{
     box-shadow: 0 0 0 35px white inset !important;
-}
-textarea {
-  height: 9rem;
-  padding: 1rem;
-}
-.slick-thumb li {
-  width: 60px;
-  height: 45px;
-}
-.slick-thumb {
-  bottom: -45px;
-}
+  }
+  textarea {
+    height: 9rem;
+    padding: 1rem;
+  }
+  .slick-thumb li {
+    width: 60px;
+    height: 45px;
+  }
+  .slick-thumb {
+    bottom: -45px;
+  }
 `
