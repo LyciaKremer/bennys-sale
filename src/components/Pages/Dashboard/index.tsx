@@ -269,7 +269,12 @@ const Dashboard = () => {
                           {carro?.vendido ? (
                             <S.SoldStatus>Vendido!</S.SoldStatus>
                           ) : (
-                            <div className="price">R${carro.valor}.000</div>
+                            <div className="price">
+                              {carro.valor.toLocaleString('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL'
+                              })}
+                            </div>
                           )}
                         </div>
                       </S.CardCar>

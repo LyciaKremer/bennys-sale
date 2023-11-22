@@ -79,7 +79,10 @@ const Car = () => {
 
   function copyToClipboard(carro: any) {
     const valor = parseFloat(carro?.valor) || 0
-    const valorFormatado = valor.toFixed(3)
+    const valorFormatado = valor.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    })
 
     const texto =
       `e tablet; me Gostei desse carro!` +
@@ -172,7 +175,18 @@ const Car = () => {
                         {carro?.telefone}
                       </S.InfoCarDetails>
                     </S.ListInfo>
-                    <S.Price>R${carro?.valor}.000</S.Price>
+                    <S.Price>
+                      <S.Price>
+                        {typeof carro?.valor === 'number' ||
+                        (typeof carro?.valor === 'string' &&
+                          !isNaN(parseFloat(carro.valor)))
+                          ? parseFloat(carro.valor).toLocaleString('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL'
+                            })
+                          : 'Valor não disponível'}
+                      </S.Price>
+                    </S.Price>
                     <Button
                       className="button"
                       color="primary"
