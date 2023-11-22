@@ -94,8 +94,8 @@ export const InfoCar = styled.div`
   }
   button {
     position: relative;
-    bottom: -57px;
-    right: 25px;
+    bottom: -42px;
+    right: 27px;
     text-transform: uppercase;
     letter-spacing: 1.4px;
     font-weight: 700 !important;
