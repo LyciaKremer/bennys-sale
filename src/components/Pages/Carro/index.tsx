@@ -82,10 +82,10 @@ const Car = () => {
     const valorFormatado = valor.toFixed(3)
 
     const texto =
-      `me Gostei desse carro!` +
-      `\n- Modelo: ${carro?.modelo}` +
-      `\n- Dono: ${carro?.dono}` +
-      `\n- Valor: ${valorFormatado}`
+      `e tablet; me Gostei desse carro!` +
+      `- Modelo: ${carro?.modelo}` +
+      `- Dono: ${carro?.dono}` +
+      `- Valor: ${valorFormatado}`
     navigator.clipboard.writeText(texto)
   }
 
